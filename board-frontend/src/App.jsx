@@ -8,6 +8,7 @@ import JalFormPage from './pages/JalFormPage';
 import JalDetailPage from './pages/JalDetailPage';
 import ThjaListPage from './pages/ThjaListPage';
 import ThjaFormPage from './pages/ThjaFormPage';
+import ThjaDetailPage from './pages/ThjaDetailPage';
 
 import './App.css';
 
@@ -19,11 +20,12 @@ function App() {
         <main>
           <Routes>
             <Route path='/' element={<JalListPage />} />
-            <Route path='/jal' element={<JalListPage />} />
-            <Route path='/jal/new' element={<JalFormPage />} />
-            <Route path='/jal/:id' element={<JalDetailPage />} />
-            <Route path='/thja' element={<ThjaListPage />} />
-            <Route path='/thja/new' element={<ThjaFormPage />} />
+            <Route path='/jals' element={<JalListPage />} />
+            <Route path='/jals/new' element={<JalFormPage />} />
+            <Route path='/jals/:id' element={<JalDetailPage />} />
+            <Route path='/thjas' element={<ThjaListPage />} />
+            <Route path='/thjas/new' element={<ThjaFormPage />} />
+            <Route path='/thjas/:id' element={<ThjaDetailPage />} />
           </Routes>
         </main>
         <Footer />

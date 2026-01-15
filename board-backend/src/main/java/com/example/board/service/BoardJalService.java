@@ -11,8 +11,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.board.dto.BoardJalRequestDto;
-import com.example.board.dto.BoardJalResponseDto;
+import com.example.board.dto.BoardRequestDto;
+import com.example.board.dto.BoardResponseDto;
 import com.example.board.entity.Attachment;
 import com.example.board.entity.BoardJal;
 import com.example.board.mapper.BoardJalMapper;
@@ -34,7 +34,7 @@ public class BoardJalService {
 	@Value("${file.upload-dir}")
 	private String uploadDir; // 절대 경로
 	
-	public BoardJal createBoardJal(BoardJalRequestDto dto) {
+	public BoardJal createBoardJal(BoardRequestDto dto) {
 		
 		BoardJal boardJal = boardJalMapper.toBoardJalEntity(dto);
 		
@@ -55,14 +55,14 @@ public class BoardJalService {
 	}
 	
 	@Transactional(readOnly = true)
-	public List<BoardJalResponseDto> getAllBoardJals() {
+	public List<BoardResponseDto> getAllBoardJals() {
 		return boardJalRepository.findAll().stream()
 				.map(boardJalMapper::toBoardJalResponseDto)
 				.collect(Collectors.toList());
 	}
 	
 	@Transactional(readOnly = true)
-	public BoardJalResponseDto getBoardJalDetail(Long id) {
+	public BoardResponseDto getBoardJalDetail(Long id) {
 		BoardJal boardJal = boardJalRepository.findById(id)
 				.orElseThrow(() -> new RuntimeException("BoardJal not found"));
 		

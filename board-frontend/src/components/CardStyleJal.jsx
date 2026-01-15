@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, Button, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-const CardJalComponent = ({ boardJals }) => {
+const CardStyleJal = ({ boardJals }) => {
   const API_URL = "http://localhost:8080";
 
   return (
@@ -27,7 +27,7 @@ const CardJalComponent = ({ boardJals }) => {
                 )
               )}
               <Card.Body>
-                <Link to={`/jal/${jal.id}`}>
+                <Link to={`/jals/${jal.id}`}>
                   <Card.Title>{jal.title}</Card.Title>
                 </Link>
               </Card.Body>
@@ -35,11 +35,11 @@ const CardJalComponent = ({ boardJals }) => {
           </Col>
         ))}
       </Row>
-      <Link to="/jal/new">
+      <Link to="/jals/new">
         <Button variant='success' className='mt-3'>등록하기</Button>
       </Link>
     </>
   );
 };
 
-export default CardJalComponent;
+export default CardStyleJal;

@@ -1,8 +1,30 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { Container } from 'react-bootstrap';
+
+import { getAllBoardThjas } from '../api/ThjaApi';
+import TableStyle from '../components/TableStyle';
 
 const ThjaListPage = () => {
+  const [boardThjas, setBoardThjas] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getAllBoardThjas();
+        console.log("ThjaListPage: ", data);
+        setBoardThjas(data);
+      } catch (error) {
+        console.error("ThjaListPage 에러: ", error);
+      }
+    };
+    fetchData();
+  }, []);
+
   return (
-    <div>ThjaListPage</div>
+    <Container className="mt-4">
+      <h2>200자 리스트</h2>
+      <TableStyle posts={boardThjas} />
+    </Container>    
   );
 };
 

@@ -25,7 +25,7 @@ export const createJal = async (title, content, files) => {
     console.error("createJal 에러: ", error);
     throw error;
   }
-}
+};
 
 // 전체 짤게시글 조회
 export const getAllBoardJals = async () => {

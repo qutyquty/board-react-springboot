@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.board.dto.BoardJalRequestDto;
-import com.example.board.dto.BoardJalResponseDto;
+import com.example.board.dto.BoardRequestDto;
+import com.example.board.dto.BoardResponseDto;
 import com.example.board.entity.BoardJal;
 import com.example.board.service.BoardJalService;
 
@@ -26,21 +26,19 @@ public class BoardJalController {
 	private final BoardJalService boardJalService;
 	
 	@PostMapping
-	public ResponseEntity<BoardJal> createBoardJal(@ModelAttribute BoardJalRequestDto dto) {
-		System.out.println("file size: " + dto.getFiles().size());
-		
+	public ResponseEntity<BoardJal> createBoardJal(@ModelAttribute BoardRequestDto dto) {
 		BoardJal boardJal = boardJalService.createBoardJal(dto);
 		return ResponseEntity.ok(boardJal);
 	}
 	
 	@GetMapping
-	public ResponseEntity<List<BoardJalResponseDto>> getAllBoardJals() {
-		List<BoardJalResponseDto> boardJals = boardJalService.getAllBoardJals();
+	public ResponseEntity<List<BoardResponseDto>> getAllBoardJals() {
+		List<BoardResponseDto> boardJals = boardJalService.getAllBoardJals();
 		return ResponseEntity.ok(boardJals);
 	}
 	
 	@GetMapping("/{id}")
-	public BoardJalResponseDto getBoardJalDetail(@PathVariable("id") Long id) {
+	public BoardResponseDto getBoardJalDetail(@PathVariable("id") Long id) {
 		return boardJalService.getBoardJalDetail(id);
 	}
 	

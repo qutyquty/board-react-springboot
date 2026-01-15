@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 
 import { getAllBoardJals } from '../api/JalApi';
-import CardJalComponent from '../components/CardJalComponent';
+import CardStyleJal from '../components/CardStyleJal';
 
 const JalListPage = () => {
   const [boardJals, setBoardJals] = useState([]);
@@ -23,7 +23,7 @@ const JalListPage = () => {
   return (
     <Container className="mt-4">
       <h2>짤 리스트</h2>
-      <CardJalComponent boardJals={boardJals} />
+      <CardStyleJal boardJals={boardJals} />
     </Container>
   );
 };

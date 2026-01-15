@@ -4,14 +4,14 @@ import { useNavigate } from 'react-router-dom';
 
 import { deleteBoardJal } from '../api/JalApi';
 
-const DetailComponent = ({ jal }) => {
+const DetailJal = ({ jal }) => {
   const navigate = useNavigate();
 
   const handleDelete = async () => {
     if (window.confirm("정말 삭제하시겠습니까?")) {
       try {
         await deleteBoardJal(jal.id);
-        navigate("/jal");
+        navigate("/jals");
       } catch (error) {
         console.error(error);
       }      
@@ -49,4 +49,4 @@ const DetailComponent = ({ jal }) => {
   );
 };
 
-export default DetailComponent;
+export default DetailJal;

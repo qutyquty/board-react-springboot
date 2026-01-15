@@ -21,10 +21,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "board_jal")
+@Table(name = "board_thja")
 @Getter @Setter
 @NoArgsConstructor @AllArgsConstructor @Builder
-public class BoardJal {
+public class BoardThja {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,9 +37,9 @@ public class BoardJal {
 	private LocalDateTime createdAt;
 	
 	@UpdateTimestamp
-	private LocalDateTime updatedAt;	
+	private LocalDateTime updatedAt;
 	
-	@OneToMany(mappedBy = "boardJal", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "boardThja", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Attachment> attachments = new ArrayList<>();
 
 }

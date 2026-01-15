@@ -12,56 +12,53 @@ import com.example.board.dto.BoardRequestDto;
 import com.example.board.dto.BoardResponseDto;
 import com.example.board.entity.Attachment;
 import com.example.board.entity.BoardJal;
+import com.example.board.entity.BoardThja;
 
 @Component
-public class BoardJalMapper {
+public class BoardThjaMapper {
 	
-	public BoardJal toBoardJalEntity(BoardRequestDto dto) {
+	public BoardThja toBoardThjaEntity(BoardRequestDto dto) {
 		
-		BoardJal boardJal = BoardJal.builder()
+		BoardThja boardThja = BoardThja.builder()
 				.title(dto.getTitle())
 				.content(dto.getContent())
 				.build();
 		
-		return boardJal;
+		return boardThja;
 		
 	}
 	
-	public Attachment toAttachmentEntity(MultipartFile file, BoardJal boardJal, String savedpath) {
+	public Attachment toAttachmentEntity(MultipartFile file, BoardThja boardThja, String savedpath) {
 		Attachment attachment = Attachment.builder()
 				.fileName(file.getOriginalFilename())
 				.savedFileName(Paths.get(savedpath).getFileName().toString())
 				.filePath(savedpath)
 				.fileSize(file.getSize())
 				.fileType(file.getContentType())
-				.boardJal(boardJal)
+				.boardThja(boardThja)
 				.build();
 		
 		return attachment;
 	}
 	
-	public BoardResponseDto toBoardJalResponseDto(BoardJal boardJal) {
+	public BoardResponseDto toBoardResponseDto(BoardThja boardThja) {
 		
 		BoardResponseDto dto = new BoardResponseDto();
-		dto.setId(boardJal.getId());
-		dto.setTitle(boardJal.getTitle());
-		dto.setContent(boardJal.getContent());
-		dto.setCreatedAt(boardJal.getCreatedAt());
-		dto.setUpdatedAt(boardJal.getUpdatedAt());
+		dto.setId(boardThja.getId());
+		dto.setTitle(boardThja.getTitle());
+		dto.setContent(boardThja.getContent());
+		dto.setCreatedAt(boardThja.getCreatedAt());
+		dto.setUpdatedAt(boardThja.getUpdatedAt());
 		
-		if (boardJal.getAttachments() != null) {
+		if (boardThja.getAttachments() != null) {
 			// 전체 첨부파일 리스트
 			dto.setAttachments(
-					boardJal.getAttachments().stream()
+					boardThja.getAttachments().stream()
 						.map(this::toAttachmentResponseDto)
 						.collect(Collectors.toList())
 			);
-			
-			// 랜덤 하나 선택
-			int randomIndex = new Random().nextInt(boardJal.getAttachments().size());
-			Attachment randomAttachment = boardJal.getAttachments().get(randomIndex);
-			dto.setRandomAttachment(toAttachmentResponseDto(randomAttachment));
 		}
+		
 		return dto;
 		
 	}
@@ -76,6 +73,6 @@ public class BoardJalMapper {
 		dto.setFileSize(attachment.getFileSize());
 		dto.setUploadedAt(attachment.getUploadedAt());
 		return dto;
-	}
+	}	
 
 }

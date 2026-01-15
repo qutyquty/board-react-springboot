@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 
-import DetailComponent from '../components/DetailComponent';
+import DetailJal from '../components/DetailJal';
 import { getBoardJalDetail } from '../api/JalApi';
 
 const JalDetailPage = () => {
@@ -26,7 +26,7 @@ const JalDetailPage = () => {
 
   return (
     <Container className='mt-4'>
-      <DetailComponent jal={jal} />
+      <DetailJal jal={jal} />
     </Container>
   );
 };

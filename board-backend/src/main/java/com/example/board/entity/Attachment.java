@@ -40,5 +40,9 @@ public class Attachment {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "boardJal_id")
 	private BoardJal boardJal;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "boardThja_id")
+	private BoardThja boardThja;
 
 }

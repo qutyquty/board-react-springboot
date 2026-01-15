@@ -16,8 +16,8 @@ const Header = () => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav>
               <Nav.Link href="/">Home</Nav.Link>
-              <Nav.Link href="/jal">짤방</Nav.Link>
-              <Nav.Link href="/thja">200자</Nav.Link>
+              <Nav.Link href="/jals">짤방</Nav.Link>
+              <Nav.Link href="/thjas">200자</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
