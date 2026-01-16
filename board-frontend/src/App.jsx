@@ -9,6 +9,9 @@ import JalDetailPage from './pages/JalDetailPage';
 import ThjaListPage from './pages/ThjaListPage';
 import ThjaFormPage from './pages/ThjaFormPage';
 import ThjaDetailPage from './pages/ThjaDetailPage';
+import FreeListPage from './pages/FreeListPage';
+import FreeFormPage from './pages/FreeFormPage';
+import FreeDetailPage from './pages/FreeDetailPage';
 
 import './App.css';
 
@@ -26,6 +29,9 @@ function App() {
             <Route path='/thjas' element={<ThjaListPage />} />
             <Route path='/thjas/new' element={<ThjaFormPage />} />
             <Route path='/thjas/:id' element={<ThjaDetailPage />} />
+            <Route path='/frees' element={<FreeListPage />} />
+            <Route path='/frees/new' element={<FreeFormPage />} />
+            <Route path='/frees/:id' element={<FreeDetailPage />} />
           </Routes>
         </main>
         <Footer />

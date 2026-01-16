@@ -21,7 +21,7 @@ const TableStyle = ({ posts }) => {
               <button className='btn btn-primary w-100'>검색</button>
           </div>
           <div className='col-md-2'>
-              <Link to={`/thjas/new`} className='btn btn-primary w-100'>작성하기</Link>
+              <Link to={`/frees/new`} className='btn btn-primary w-100'>작성하기</Link>
           </div>
       </div>
       <Table striped bordered hover className='text-center align-middle'>
@@ -43,7 +43,7 @@ const TableStyle = ({ posts }) => {
               <tr key={post.id}>
                 <td>{index + 1}</td>
                 <td className='text-start'>
-                  <Link to={`/thjas/${post.id}`}>{post.title}</Link>
+                  <Link to={`/frees/${post.id}`}>{post.title}</Link>
                 </td>
                 <td>{dayjs(post.createdAt).format("YYYY-MM-DD HH:mm:ss")}</td>
               </tr>

@@ -17,7 +17,8 @@ const Header = () => {
             <Nav>
               <Nav.Link href="/">Home</Nav.Link>
               <Nav.Link href="/jals">짤방</Nav.Link>
-              <Nav.Link href="/thjas">200자</Nav.Link>
+              <Nav.Link href="/thjas">(X)200자</Nav.Link>
+              <Nav.Link href="/frees">자유게시판</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>

@@ -42,7 +42,6 @@ const DetailJal = ({ jal }) => {
         )}
         <hr />
         <Card.Text>{jal.content}</Card.Text>
-        <hr />
         <Button variant='danger' onClick={handleDelete}>삭제</Button>
       </Card.Body>        
     </Card>

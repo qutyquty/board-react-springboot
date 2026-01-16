@@ -31,6 +31,7 @@ export const createJal = async (title, content, files) => {
 export const getAllBoardJals = async () => {
   try {
     const response = await JalApi.get(`/jals`);
+    console.log("getAllBoardJals: ", response.data);
     return response.data;
   } catch (error) {
     console.error("getAllBoardJals 에러: ", error);

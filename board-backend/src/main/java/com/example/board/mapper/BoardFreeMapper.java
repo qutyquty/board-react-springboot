@@ -1,7 +1,6 @@
 package com.example.board.mapper;
 
 import java.nio.file.Paths;
-import java.util.Random;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
@@ -11,49 +10,49 @@ import com.example.board.dto.AttachmentResponseDto;
 import com.example.board.dto.BoardRequestDto;
 import com.example.board.dto.BoardResponseDto;
 import com.example.board.entity.Attachment;
-import com.example.board.entity.BoardJal;
+import com.example.board.entity.BoardFree;
 import com.example.board.entity.BoardThja;
 
 @Component
-public class BoardThjaMapper {
+public class BoardFreeMapper {
 	
-	public BoardThja toBoardThjaEntity(BoardRequestDto dto) {
+	public BoardFree toBoardFreeEntity(BoardRequestDto dto) {
 		
-		BoardThja boardThja = BoardThja.builder()
+		BoardFree boardFree = BoardFree.builder()
 				.title(dto.getTitle())
 				.content(dto.getContent())
 				.build();
 		
-		return boardThja;
+		return boardFree;
 		
 	}
 	
-	public Attachment toAttachmentEntity(MultipartFile file, BoardThja boardThja, String savedpath) {
+	public Attachment toAttachmentEntity(MultipartFile file, BoardFree boardFree, String savedpath) {
 		Attachment attachment = Attachment.builder()
 				.fileName(file.getOriginalFilename())
 				.savedFileName(Paths.get(savedpath).getFileName().toString())
 				.filePath(savedpath)
 				.fileSize(file.getSize())
 				.fileType(file.getContentType())
-				.boardThja(boardThja)
+				.boardFree(boardFree)
 				.build();
 		
 		return attachment;
 	}
 	
-	public BoardResponseDto toBoardResponseDto(BoardThja boardThja) {
+	public BoardResponseDto toBoardResponseDto(BoardFree boardFree) {
 		
 		BoardResponseDto dto = new BoardResponseDto();
-		dto.setId(boardThja.getId());
-		dto.setTitle(boardThja.getTitle());
-		dto.setContent(boardThja.getContent());
-		dto.setCreatedAt(boardThja.getCreatedAt());
-		dto.setUpdatedAt(boardThja.getUpdatedAt());
+		dto.setId(boardFree.getId());
+		dto.setTitle(boardFree.getTitle());
+		dto.setContent(boardFree.getContent());
+		dto.setCreatedAt(boardFree.getCreatedAt());
+		dto.setUpdatedAt(boardFree.getUpdatedAt());
 		
-		if (boardThja.getAttachments() != null) {
+		if (boardFree.getAttachments() != null) {
 			// 전체 첨부파일 리스트
 			dto.setAttachments(
-					boardThja.getAttachments().stream()
+					boardFree.getAttachments().stream()
 						.map(this::toAttachmentResponseDto)
 						.collect(Collectors.toList())
 			);

@@ -42,7 +42,7 @@ public class Attachment {
 	private BoardJal boardJal;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "boardThja_id")
-	private BoardThja boardThja;
+	@JoinColumn(name = "boardFree_id")
+	private BoardFree boardFree;
 
 }
