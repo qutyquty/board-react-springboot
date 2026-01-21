@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 
 import { getAllBoardThjas } from '../api/ThjaApi';
-import TableStyle from '../components/TableStyle';
+import CardStyle from '../components/CardStyle';
 
 const ThjaListPage = () => {
   const [boardThjas, setBoardThjas] = useState([]);
@@ -23,7 +23,7 @@ const ThjaListPage = () => {
   return (
     <Container className="mt-4">
       <h2>200자 리스트</h2>
-      <TableStyle posts={boardThjas} />
+      <CardStyle posts={boardThjas} />
     </Container>    
   );
 };

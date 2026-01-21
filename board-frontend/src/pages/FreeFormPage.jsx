@@ -20,7 +20,7 @@ const FreeFormPage = () => {
   return (
     <Container className='mt-4'>
       <h2>자유게시판</h2>
-      <FormComponent onSubmit={handleSubmit} />
+      <FormComponent onSubmit={handleSubmit} showFile={true} />
     </Container>
   );
 };

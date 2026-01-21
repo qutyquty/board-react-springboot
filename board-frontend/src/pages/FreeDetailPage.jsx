@@ -7,7 +7,7 @@ import { getBoardFreeDetail } from '../api/FreeApi';
 
 const FreeDetailPage = () => {
   const { id } = useParams();
-  const [thja, setThja] = useState(null);
+  const [free, setFree] = useState(null);
 
   useEffect(() => {
     fetchData(id);
@@ -16,17 +16,17 @@ const FreeDetailPage = () => {
   const fetchData = async (id) => {
     try {
       const data = await getBoardFreeDetail(id);
-      setThja(data);
+      setFree(data);
     } catch (error) {
       console.error("FreeDetailPage 에러: ", error);
     }
   };
 
-  if (!thja) return <p>Loading ...</p>;
+  if (!free) return <p>Loading ...</p>;
 
   return (
     <Container className='mt-4'>
-      <DetailBoard post={thja} />
+      <DetailBoard redirectPath={'/frees'} post={free} />
     </Container>
   );
 };

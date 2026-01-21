@@ -1,23 +1,21 @@
 package com.example.board.dto;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter @Setter
-public class BoardResponseDto {
+@NoArgsConstructor @AllArgsConstructor @Builder
+public class CommentDto {
 	
 	private Long id;
-	private String title;
 	private String content;
+	private Long boardThjaId;
 	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;
-	private List<AttachmentResponseDto> attachments;
-	private AttachmentResponseDto randomAttachment;
-	
-	// 댓글 수
-	private int commentCount;
 
 }

@@ -4,6 +4,7 @@ import { Container } from 'react-bootstrap';
 
 import DetailBoard from '../components/DetailBoard';
 import { getBoardThjaDetail } from '../api/ThjaApi';
+import CommentBoard from '../components/CommentBoard';
 
 const ThjaDetailPage = () => {
   const { id } = useParams();
@@ -26,7 +27,8 @@ const ThjaDetailPage = () => {
 
   return (
     <Container className='mt-4'>
-      <DetailBoard post={thja} />
+      <DetailBoard redirectPath={'/thjas'} post={thja} showFile={false} />
+      <CommentBoard postId={thja.id} />
     </Container>
   );
 };

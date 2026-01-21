@@ -7,7 +7,7 @@ const Header = () => {
       <Navbar bg="dark" variant="dark" expand="lg" fixed="top">
         <Container>
           {/* 브랜드 로고 */}
-          <Navbar.Brand href="/">MyApp</Navbar.Brand>
+          <Navbar.Brand href="/">Board App</Navbar.Brand>
 
           {/* 햄버거 버튼 */}
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -16,9 +16,8 @@ const Header = () => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav>
               <Nav.Link href="/">Home</Nav.Link>
-              <Nav.Link href="/jals">짤방</Nav.Link>
-              <Nav.Link href="/thjas">(X)200자</Nav.Link>
               <Nav.Link href="/frees">자유게시판</Nav.Link>
+              <Nav.Link href="/thjas">200자</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>

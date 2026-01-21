@@ -6,17 +6,10 @@ const ThjaApi = axios.create({
 });
 
 // 게시글 등록
-export const createThja = async (title, content, files) => {
+export const createThja = async (title, content) => {
   const formData = new FormData();
   formData.append("title", title);
   formData.append("content", content);
-
-  // 여러 파일을 같은 key(files)로 append 해야 DTO의 List<MultipartFile>에 매핑됨
-  Object.entries(files).forEach(([KeyboardEvent, file]) => {
-    if (file) {
-      formData.append("files", file);
-    }
-  });
 
   try {
     const response = await ThjaApi.post("/thjas", formData);
@@ -47,15 +40,6 @@ export const getBoardThjaDetail = async (id) => {
     console.error("getBoardThjaDetail 에러: ", error);
     throw error;
   }
-};
-
-// 파일 다운로드
-export const downloadFile = async (filePath) => {
-  const response = await ThjaApi.get(`/thjas/files`, {
-    params: { filePath }, // filePath를 쿼리 파라미터로 전달
-    responseType: 'blob',
-  });
-  return response.data;
 };
 
 export const deleteBoardThja = async (id) => {

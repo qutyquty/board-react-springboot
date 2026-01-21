@@ -64,14 +64,14 @@ public class BoardFreeService {
 	@Transactional(readOnly = true)
 	public BoardResponseDto getBoardFreeDetail(Long id) {
 		BoardFree boardFree = boardFreeRepository.findById(id)
-				.orElseThrow(() -> new RuntimeException("BoardThja not found"));
+				.orElseThrow(() -> new RuntimeException("BoardFree not found"));
 		
 		return boardFreeMapper.toBoardResponseDto(boardFree);
 	}
 	
 	public void deleteBoardFree(Long id) {
 		BoardFree boardFree = boardFreeRepository.findById(id)
-				.orElseThrow(() -> new RuntimeException("BoardThja not found"));
+				.orElseThrow(() -> new RuntimeException("BoardFree not found"));
 		
 		// 첨부파일 삭제 (파일 시스템+DB)
 		boardFree.getAttachments().forEach(att -> {

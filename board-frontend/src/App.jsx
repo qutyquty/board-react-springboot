@@ -22,10 +22,7 @@ function App() {
         <Header />
         <main>
           <Routes>
-            <Route path='/' element={<JalListPage />} />
-            <Route path='/jals' element={<JalListPage />} />
-            <Route path='/jals/new' element={<JalFormPage />} />
-            <Route path='/jals/:id' element={<JalDetailPage />} />
+            <Route path='/' element={<FreeListPage />} />
             <Route path='/thjas' element={<ThjaListPage />} />
             <Route path='/thjas/new' element={<ThjaFormPage />} />
             <Route path='/thjas/:id' element={<ThjaDetailPage />} />
