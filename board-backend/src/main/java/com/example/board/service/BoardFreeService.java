@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.board.dto.BoardRequestDto;
 import com.example.board.dto.BoardResponseDto;
+import com.example.board.dto.BoardUpdateRequestDto;
 import com.example.board.entity.Attachment;
 import com.example.board.entity.BoardFree;
 import com.example.board.mapper.BoardFreeMapper;
@@ -86,6 +87,72 @@ public class BoardFreeService {
 		
 		// 게시글 삭제
 		boardFreeRepository.delete(boardFree);
+	}
+	
+	public void updateBoardFree(Long id, BoardUpdateRequestDto dto) {
+		// 기존 게시글 조회
+		BoardFree boardFree = boardFreeRepository.findById(id)
+				.orElseThrow(() -> new RuntimeException("BoardFree not found"));
+		
+		// filesToDelete 처리
+		if (dto.getFilesToDelete() != null && !dto.getFilesToDelete().isEmpty()) {
+			boardFree.getAttachments().removeIf(att -> {
+				if (dto.getFilesToDelete().contains(att.getId())) {
+					// 실제 파일 삭제
+					Path path = Paths.get(att.getFilePath());
+					try {
+						Files.deleteIfExists(path);						
+					} catch (IOException e) {
+						// 로그만 남기고 계속 진행
+						e.printStackTrace();
+					}
+					// removeIf 조건 만족 -> orphanRemoval에 의해 DB에서도 삭제됨
+					return true; // 리스트에서 제거 
+				}
+				return false; // 리스트 유지
+			});
+//			dto.getFilesToDelete().forEach(fileId -> {
+//				boardFree.getAttachments().stream()
+//					.filter(att -> att.getId().equals(fileId))
+//					.findFirst()
+//					.ifPresent(att -> {
+//						// 실제 파일 삭제
+//						Path path = Paths.get(att.getFilePath());
+//						try {
+//							Files.deleteIfExists(path);
+//						} catch (IOException e) {
+//							// 로그만 남기고 계속 진행
+//							e.printStackTrace();
+//						}
+//						
+//						// DB에서 첨부파일 삭제
+//						attachmentRepository.delete(att);
+//					});
+//			});
+		}
+		
+		// 제목, 내용 수정
+		boardFree.setTitle(dto.getTitle());
+		boardFree.setContent(dto.getContent());
+		
+		// 새 파일 업로드 처리
+		if (dto.getNewFiles() != null) {
+			dto.getNewFiles().stream()
+				.filter(file -> file != null && !file.isEmpty())
+				.forEach(file -> {
+					// 실제 파일 저장
+					String savedPath = fileStorageService.save(file);
+					
+					// 첨부파일 엔티티 생성
+					Attachment attachment = boardFreeMapper.toAttachmentEntity(file, boardFree, savedPath);
+					
+					// DB 저장
+					attachmentRepository.save(attachment);
+				});
+		}
+		
+		// 게시글 저장 (title, content 변경 반영)
+		boardFreeRepository.save(boardFree);
 	}
 
 }

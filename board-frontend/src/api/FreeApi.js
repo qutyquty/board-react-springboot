@@ -68,3 +68,30 @@ export const downloadFile = async (filePath) => {
   });
   return response.data;
 };
+
+// 게시글 수정
+export const updateBoardFree = async (id, data) => {
+  const formData = new FormData();
+  formData.append("title", data.title);
+  formData.append("content", data.content);
+
+  // 삭제할 파일 ID들
+  data.filesToDelete.forEach((fileId) => {
+    formData.append("filesToDelete", fileId);
+  });
+
+  // 새로 업로드한 파일들
+  data.files.forEach((file) => {
+    if (file instanceof File) {
+      formData.append("newFiles", file);
+    }
+  });
+
+  try {
+    const response = await FreeApi.put(`/frees/${id}`, formData);
+    return response.data;
+  } catch (error) {
+    console.error("updateBoardFree 에러: ", error);
+    throw error;
+  }
+};

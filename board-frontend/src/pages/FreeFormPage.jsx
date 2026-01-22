@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 
 import { createFree } from '../api/FreeApi';
-import FormComponent from '../components/FormComponent';
+import FormCU from '../components/FormCU';
 
 const FreeFormPage = () => {
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ const FreeFormPage = () => {
   return (
     <Container className='mt-4'>
       <h2>자유게시판</h2>
-      <FormComponent onSubmit={handleSubmit} showFile={true} />
+      <FormCU onSubmit={handleSubmit} showFile={true} />
     </Container>
   );
 };

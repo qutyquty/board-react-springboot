@@ -9,6 +9,9 @@ const CardStyle = ({ posts }) => {
         {posts?.map((post) => (
           <Col md={3} key={post.id} className='mb-3'>
             <Card>
+              <Card.Header>
+                <Card.Title>{post.title}</Card.Title>
+              </Card.Header>
               <Card.Body>
                 <Link to={`/thjas/${post.id}`}
                   style={{ textDecoration: "none", color: "inherit" }}
@@ -16,8 +19,7 @@ const CardStyle = ({ posts }) => {
                   <Card.Text>{post.content}</Card.Text>                  
                 </Link>
               </Card.Body>
-              <Card.Footer>
-                <Card.Title>{post.title}</Card.Title>
+              <Card.Footer>                
                 <div className='d-flex justify-content-end'>
                   <Card.Text>릴레이 수: {post.commentCount}</Card.Text>
                 </div>

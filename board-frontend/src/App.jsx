@@ -12,6 +12,7 @@ import ThjaDetailPage from './pages/ThjaDetailPage';
 import FreeListPage from './pages/FreeListPage';
 import FreeFormPage from './pages/FreeFormPage';
 import FreeDetailPage from './pages/FreeDetailPage';
+import FreeEditPage from './pages/FreeEditPage';
 
 import './App.css';
 
@@ -29,6 +30,7 @@ function App() {
             <Route path='/frees' element={<FreeListPage />} />
             <Route path='/frees/new' element={<FreeFormPage />} />
             <Route path='/frees/:id' element={<FreeDetailPage />} />
+            <Route path='/frees/:id/edit' element={<FreeEditPage />} />
           </Routes>
         </main>
         <Footer />

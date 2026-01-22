@@ -44,7 +44,7 @@ const DetailBoard = ({ redirectPath, post, showFile = true }) => {
         <Card.Title>{post.title}</Card.Title>
         <Card.Text 
           style={{
-            height: "120px",
+            height: "300px",
             overflowY: "auto",
             whiteSpace: "pre-line"
           }}
@@ -71,7 +71,13 @@ const DetailBoard = ({ redirectPath, post, showFile = true }) => {
           </ListGroup>
         )}
 
-        <Button variant='danger' onClick={handleDelete}>삭제</Button>
+        <div className='d-flex'>
+          <Button variant='warning' className='me-2'
+            onClick={() => navigate(`/frees/${post.id}/edit`)}>
+            수정
+          </Button>
+          <Button variant='danger' onClick={handleDelete}>삭제</Button>
+        </div>
       </Card.Body>
     </Card>
   );

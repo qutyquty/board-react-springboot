@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 
 import { createThja } from '../api/ThjaApi';
-import FormComponent from '../components/FormComponent';
+import FormCU from '../components/FormCU';
 
 const ThjaFormPage = () => {
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ const ThjaFormPage = () => {
   return (
     <Container className='mt-4'>
       <h2>200자 등록</h2>
-      <FormComponent onSubmit={handleSubmit} showFile={false} />
+      <FormCU onSubmit={handleSubmit} showFile={false} />
     </Container>
   );
 };
