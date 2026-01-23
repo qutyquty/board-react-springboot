@@ -12,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.board.dto.BoardRequestDto;
 import com.example.board.dto.BoardResponseDto;
+import com.example.board.dto.BoardUpdateRequestDto;
+import com.example.board.entity.Attachment;
 import com.example.board.entity.BoardFree;
 import com.example.board.entity.BoardThja;
 import com.example.board.mapper.BoardThjaMapper;
@@ -54,6 +56,19 @@ public class BoardThjaService {
 		
 		// 게시글 삭제
 		boardThjaRepository.delete(boardThja);
+	}
+	
+	public void updateBoardThja(Long id, BoardUpdateRequestDto dto) {
+		// 기존 게시글 조회
+		BoardThja boardThja = boardThjaRepository.findById(id)
+				.orElseThrow(() -> new RuntimeException("BoardThja not found"));
+		
+		// 제목, 내용 수정
+		boardThja.setTitle(dto.getTitle());
+		boardThja.setContent(dto.getContent());
+		
+		// 게시글 저장 (title, content 변경 반영)
+		boardThjaRepository.save(boardThja);
 	}
 	
 }

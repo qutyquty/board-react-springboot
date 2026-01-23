@@ -51,3 +51,18 @@ export const deleteBoardThja = async (id) => {
     throw error;
   }
 };
+
+// 게시글 수정
+export const updateBoardThja = async (id, data) => {
+  const formData = new FormData();
+  formData.append("title", data.title);
+  formData.append("content", data.content);
+
+  try {
+    const response = await ThjaApi.put(`/thjas/${id}`, formData);
+    return response.data;
+  } catch (error) {
+    console.error("updateBoardThja 에러: ", error);
+    throw error;
+  }
+};

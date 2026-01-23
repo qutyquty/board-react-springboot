@@ -111,24 +111,6 @@ public class BoardFreeService {
 				}
 				return false; // 리스트 유지
 			});
-//			dto.getFilesToDelete().forEach(fileId -> {
-//				boardFree.getAttachments().stream()
-//					.filter(att -> att.getId().equals(fileId))
-//					.findFirst()
-//					.ifPresent(att -> {
-//						// 실제 파일 삭제
-//						Path path = Paths.get(att.getFilePath());
-//						try {
-//							Files.deleteIfExists(path);
-//						} catch (IOException e) {
-//							// 로그만 남기고 계속 진행
-//							e.printStackTrace();
-//						}
-//						
-//						// DB에서 첨부파일 삭제
-//						attachmentRepository.delete(att);
-//					});
-//			});
 		}
 		
 		// 제목, 내용 수정

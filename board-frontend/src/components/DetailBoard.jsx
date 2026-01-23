@@ -73,7 +73,7 @@ const DetailBoard = ({ redirectPath, post, showFile = true }) => {
 
         <div className='d-flex'>
           <Button variant='warning' className='me-2'
-            onClick={() => navigate(`/frees/${post.id}/edit`)}>
+            onClick={() => navigate(showFile ? `/frees/${post.id}/edit` : `/thjas/${post.id}/edit`)}>
             수정
           </Button>
           <Button variant='danger' onClick={handleDelete}>삭제</Button>
