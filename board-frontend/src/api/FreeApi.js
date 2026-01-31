@@ -1,9 +1,5 @@
 import axios from "axios";
-
-// Axios 기본 인스턴스 생성
-const FreeApi = axios.create({
-  baseURL: "http://localhost:8080/api",
-});
+import FreeApi from "./AxiosCommon";
 
 // 게시글 등록
 export const createFree = async (title, content, files) => {

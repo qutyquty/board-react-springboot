@@ -1,9 +1,5 @@
 import axios from "axios";
-
-// Axios 기본 인스턴스 생성
-const ThjaApi = axios.create({
-  baseURL: "http://localhost:8080/api",
-});
+import ThjaApi from "./AxiosCommon";
 
 // 게시글 등록
 export const createThja = async (title, content) => {
@@ -12,6 +8,11 @@ export const createThja = async (title, content) => {
   formData.append("content", content);
 
   try {
+    // FormData 내용 확인
+    for (let [key, value] of formData.entries()) {
+      console.log(`${key}: ${value}`);
+    }
+
     const response = await ThjaApi.post("/thjas", formData);
     return response.data;
   } catch (error) {

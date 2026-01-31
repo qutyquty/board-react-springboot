@@ -20,15 +20,13 @@ public class WebConfig implements WebMvcConfigurer {
 	}
 	
 	@Override
+	// Spring MVC 레벨에서 CORS를 처리
 	public void addCorsMappings(CorsRegistry registry) {
-		registry.addMapping("/api/**") // 모든 API 경로 허용
-	        .allowedOrigins("*")
+		registry.addMapping("/api/**")
+	        .allowedOrigins("http://localhost:5173") // 허용할 프론트엔드 도메인
 	        .allowedMethods("*")
-	        .allowedHeaders("*");
-//			.allowedOrigins("*") // 프론트엔드 주소
-//			.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-//			.allowedHeaders("*")
-//			.allowCredentials(true);
+	        .allowedHeaders("*")
+	        .allowCredentials(true);
 	}
 
 }
