@@ -31,6 +31,7 @@ public class BoardThjaMapper {
 		dto.setContent(boardThja.getContent());
 		dto.setCreatedAt(boardThja.getCreatedAt());
 		dto.setUpdatedAt(boardThja.getUpdatedAt());
+		dto.setWriterName(boardThja.getWriter().getUsername());
 		
 		// 댓글 수
 		dto.setCommentCount(boardThja.getComments() != null ? boardThja.getComments().size() : 0 );

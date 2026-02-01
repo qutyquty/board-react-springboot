@@ -48,12 +48,6 @@ public class BoardFreeController {
 		return ResponseEntity.ok(boardFree);
 	}
 	
-//	@GetMapping
-//	public ResponseEntity<List<BoardResponseDto>> getAllBoardFrees() {
-//		List<BoardResponseDto> boardFrees = boardFreeService.getAllBoardFrees();
-//		return ResponseEntity.ok(boardFrees);
-//	}
-	
 	@GetMapping
 	public Page<BoardResponseDto> getAllBoardFreesPagination(
 			Pageable pageable, 

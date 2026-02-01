@@ -3,6 +3,7 @@ package com.example.board.controller;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,6 +17,7 @@ import com.example.board.dto.BoardRequestDto;
 import com.example.board.dto.BoardResponseDto;
 import com.example.board.dto.BoardUpdateRequestDto;
 import com.example.board.entity.BoardThja;
+import com.example.board.security.CustomUserDetails;
 import com.example.board.service.BoardThjaService;
 
 import lombok.RequiredArgsConstructor;
@@ -28,8 +30,10 @@ public class BoardThjaController {
 	private final BoardThjaService boardThjaService;
 	
 	@PostMapping
-	public ResponseEntity<BoardThja> createBoardThja(@ModelAttribute BoardRequestDto dto) {
-		BoardThja boardThja = boardThjaService.createBoardThja(dto);
+	public ResponseEntity<BoardThja> createBoardThja(
+			@ModelAttribute BoardRequestDto dto,
+			@AuthenticationPrincipal CustomUserDetails userDetails) {
+		BoardThja boardThja = boardThjaService.createBoardThja(dto, userDetails);
 		return ResponseEntity.ok(boardThja);
 	}
 	

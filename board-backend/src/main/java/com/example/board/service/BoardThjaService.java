@@ -16,8 +16,11 @@ import com.example.board.dto.BoardUpdateRequestDto;
 import com.example.board.entity.Attachment;
 import com.example.board.entity.BoardFree;
 import com.example.board.entity.BoardThja;
+import com.example.board.entity.User;
 import com.example.board.mapper.BoardThjaMapper;
 import com.example.board.repository.BoardThjaRepository;
+import com.example.board.repository.UserRepository;
+import com.example.board.security.CustomUserDetails;
 
 import lombok.RequiredArgsConstructor;
 
@@ -28,10 +31,16 @@ public class BoardThjaService {
 	
 	private final BoardThjaRepository boardThjaRepository;
 	private final BoardThjaMapper boardThjaMapper;
+	private final UserRepository userRepository;
 	
-	public BoardThja createBoardThja(BoardRequestDto dto) {		
-		BoardThja boardThja = boardThjaMapper.toBoardThjaEntity(dto);		
-		boardThjaRepository.save(boardThja);		
+	public BoardThja createBoardThja(BoardRequestDto dto, CustomUserDetails userDetails) {
+		User writer = userRepository.findByUsername(userDetails.getUsername())
+		        .orElseThrow(() -> new RuntimeException("User not found"));
+		
+		BoardThja boardThja = boardThjaMapper.toBoardThjaEntity(dto);	
+		boardThja.setWriter(writer);
+		boardThjaRepository.save(boardThja);
+		
 		return boardThja;		
 	}
 	

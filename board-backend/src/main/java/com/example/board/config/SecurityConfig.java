@@ -14,7 +14,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import com.example.board.filter.JwtAuthenticationFilter;
+import com.example.board.security.JwtAuthenticationFilter;
 
 @Configuration
 public class SecurityConfig {

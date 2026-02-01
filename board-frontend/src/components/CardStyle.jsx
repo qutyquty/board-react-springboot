@@ -10,18 +10,22 @@ const CardStyle = ({ posts }) => {
           <Col md={3} key={post.id} className='mb-3'>
             <Card>
               <Card.Header>
-                <Card.Title>{post.title}</Card.Title>
+                <Card.Title className="mb-0">{post.title}</Card.Title>
               </Card.Header>
               <Card.Body>
                 <Link to={`/thjas/${post.id}`}
                   style={{ textDecoration: "none", color: "inherit" }}
                 >
-                  <Card.Text>{post.content}</Card.Text>                  
+                  <Card.Text style={{
+                    overflowY: "auto",
+                    whiteSpace: "pre-line"
+                  }}>{post.content}</Card.Text>                  
                 </Link>
               </Card.Body>
               <Card.Footer>                
-                <div className='d-flex justify-content-end'>
-                  <Card.Text>릴레이 수: {post.commentCount}</Card.Text>
+                <div className='d-flex justify-content-between'>
+                  <p className="mb-0">{post.writerName}</p>
+                  <p className="mb-0">릴레이 수: {post.commentCount}</p>
                 </div>
               </Card.Footer>
             </Card>
