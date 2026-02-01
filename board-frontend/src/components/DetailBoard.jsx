@@ -1,11 +1,14 @@
 import React from 'react';
 import { Card, Button, ListGroup } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import dayjs from 'dayjs';
 
 import { deleteBoardFree, downloadFile } from '../api/FreeApi';
 import { deleteBoardThja } from '../api/ThjaApi';
 
-const DetailBoard = ({ redirectPath, post, showFile = true }) => {
+const DetailBoard = ({ redirectPath, post, showFile = true, authUsername }) => {
+  console.log(authUsername + "/" + post.writerName);
+  const isWriter = authUsername === post.writerName;
   const navigate = useNavigate();
   const deleteApiMap = {
     "/frees": deleteBoardFree,
@@ -42,6 +45,10 @@ const DetailBoard = ({ redirectPath, post, showFile = true }) => {
     <Card className='mb-3'>
       <Card.Body>
         <Card.Title>{post.title}</Card.Title>
+        <Card.Subtitle className='mt-2 mb-2 text-muted'>
+          작성자: {post.writerName} | 작성일: {dayjs(post.createdAt).format("YYYY-MM-DD HH:mm:ss")}
+        </Card.Subtitle>
+        <hr />
         <Card.Text 
           style={{
             height: "300px",
@@ -71,13 +78,15 @@ const DetailBoard = ({ redirectPath, post, showFile = true }) => {
           </ListGroup>
         )}
 
-        <div className='d-flex'>
-          <Button variant='warning' className='me-2'
-            onClick={() => navigate(showFile ? `/frees/${post.id}/edit` : `/thjas/${post.id}/edit`)}>
-            수정
-          </Button>
-          <Button variant='danger' onClick={handleDelete}>삭제</Button>
-        </div>
+        {isWriter && (
+          <div className='d-flex'>
+            <Button variant='warning' className='me-2'
+              onClick={() => navigate(showFile ? `/frees/${post.id}/edit` : `/thjas/${post.id}/edit`)}>
+              수정
+            </Button>
+            <Button variant='danger' onClick={handleDelete}>삭제</Button>
+          </div>
+        )}
       </Card.Body>
     </Card>
   );

@@ -48,6 +48,7 @@ public class BoardFreeMapper {
 		dto.setContent(boardFree.getContent());
 		dto.setCreatedAt(boardFree.getCreatedAt());
 		dto.setUpdatedAt(boardFree.getUpdatedAt());
+		dto.setWriterName(boardFree.getWriter().getUsername());
 		
 		if (boardFree.getAttachments() != null) {
 			// 전체 첨부파일 리스트

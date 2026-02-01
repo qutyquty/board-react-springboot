@@ -15,7 +15,8 @@ public class BoardResponseDto {
 	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;
 	private List<AttachmentResponseDto> attachments;
-	private AttachmentResponseDto randomAttachment;
+	private AttachmentResponseDto randomAttachment; // Jal용
+	private String writerName;
 	
 	// 댓글 수
 	private int commentCount;

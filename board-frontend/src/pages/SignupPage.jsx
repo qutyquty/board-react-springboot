@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
 
 import { signup } from "../api/auth";
 
 const SignupPage = () => {
-  const [form, setForm] = useState({ username: "", password: "" });
+  const navigate = useNavigate();  
+  const [form, setForm] = useState({ 
+    username: "", password: "", passwordConfirm: "", email: "" 
+  });
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -12,9 +16,13 @@ const SignupPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (form.password !== form.passwordConfirm) {
+      alert("비밀번호가 일치하지 않습니다.");
+      return;
+    }
     try {
       await signup(form);
-      alert("회원가입 성공!");
+      navigate('/login');
     } catch (error) {
       alert("회원가입 실패");
     }
@@ -42,6 +50,20 @@ const SignupPage = () => {
                     onChange={handleChange}
                   />
                 </Form.Group>
+                <Form.Group className='mb-3'>
+                  <Form.Label>비밀번호 확인</Form.Label>
+                  <Form.Control type='password' name='passwordConfirm'
+                    placeholder='비밀번호 확인 입력'
+                    onChange={handleChange}
+                  />
+                </Form.Group>
+                <Form.Group className='mb-3'>
+                  <Form.Label>이메일</Form.Label>
+                  <Form.Control type='email' name='email'
+                    placeholder='이메일 입력'
+                    onChange={handleChange}
+                  />
+                </Form.Group>                
                 <Button variant='success' type='submit' className='w-100'>회원가입</Button>
               </Form>
             </Card.Body>

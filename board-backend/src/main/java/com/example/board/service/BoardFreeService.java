@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,9 +18,12 @@ import com.example.board.dto.BoardResponseDto;
 import com.example.board.dto.BoardUpdateRequestDto;
 import com.example.board.entity.Attachment;
 import com.example.board.entity.BoardFree;
+import com.example.board.entity.User;
 import com.example.board.mapper.BoardFreeMapper;
 import com.example.board.repository.AttachmentRepository;
 import com.example.board.repository.BoardFreeRepository;
+import com.example.board.repository.UserRepository;
+import com.example.board.security.CustomUserDetails;
 
 import lombok.RequiredArgsConstructor;
 
@@ -28,16 +33,21 @@ import lombok.RequiredArgsConstructor;
 public class BoardFreeService {
 
 	private final BoardFreeRepository boardFreeRepository;
-	private final AttachmentRepository attachmentRepository;
+	private final AttachmentRepository attachmentRepository;	
 	private final FileStorageService fileStorageService; // 실제 파일 저장 담당
 	private final BoardFreeMapper boardFreeMapper;
+	private final UserRepository userRepository;
 	
 	@Value("${file.upload-dir}")
 	private String uploadDir; // 절대 경로
 	
-	public BoardFree createBoardFree(BoardRequestDto dto) {
+	public BoardFree createBoardFree(BoardRequestDto dto, CustomUserDetails userDetails) {
+		
+		User writer = userRepository.findByUsername(userDetails.getUsername())
+		        .orElseThrow(() -> new RuntimeException("User not found"));
 		
 		BoardFree boardFree = boardFreeMapper.toBoardFreeEntity(dto);
+		boardFree.setWriter(writer);
 		
 		boardFreeRepository.save(boardFree);
 		
@@ -57,9 +67,25 @@ public class BoardFreeService {
 	
 	@Transactional(readOnly = true)
 	public List<BoardResponseDto> getAllBoardFrees() {
-		return boardFreeRepository.findAll().stream()
+		return boardFreeRepository.findAllWithWriterOrderByCreatedAtDesc().stream()
 				.map(boardFreeMapper::toBoardResponseDto)
 				.collect(Collectors.toList());
+	}
+	
+	@Transactional(readOnly = true)
+	public Page<BoardResponseDto> getAllBoardFreesPagination(Pageable pageable, String keyword) {
+		Page<BoardFree> boards = null;
+		
+		if (keyword == null || keyword.isEmpty()) {
+			boards = boardFreeRepository.findAllWithWriterPagination(pageable);
+		} else {
+			boards = boardFreeRepository.searchBoardFree(keyword, pageable);
+		}
+		
+		return boards.map(boardFreeMapper::toBoardResponseDto);
+		
+//		return boardFreeRepository.findAllWithWriterPagination(pageable)
+//				.map(boardFreeMapper::toBoardResponseDto);
 	}
 	
 	@Transactional(readOnly = true)

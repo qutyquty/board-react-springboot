@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.board.entity.User;
 import com.example.board.repository.UserRepository;
+import com.example.board.security.CustomUserDetails;
 
 import lombok.RequiredArgsConstructor;
 
@@ -21,11 +22,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 		User user = userRepository.findByUsername(username)
 				.orElseThrow(() -> new UsernameNotFoundException("User not found"));
 		
-		return org.springframework.security.core.userdetails.User
-				.withUsername(user.getUsername())
-				.password(user.getPassword())
-				.roles(user.getRole())
-				.build();
+		return new CustomUserDetails(user);
 	}
 
 }

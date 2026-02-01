@@ -27,6 +27,9 @@ public class User {
 	@Column(nullable = false)
 	private String password;
 	
+	@Column(nullable = false, unique = true)
+	private String email;
+	
 	private String role; // ROLE_USER, ROLE_ADMIN 등
 
 }

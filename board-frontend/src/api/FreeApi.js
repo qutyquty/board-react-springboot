@@ -34,6 +34,17 @@ export const getAllBoardFrees = async () => {
   }
 };
 
+// 전체 게시글 조회(페이지네이션 적용)
+export const getAllBoardFreesPagination = async (page = 0, size = 10, keyword = "") => {
+  try {
+    const response = await FreeApi.get(`/frees?page=${page}&size=${size}&sort=createdAt,DESC&keyword=${keyword}`);
+    return response.data;
+  } catch (error) {
+    console.error("getAllBoardFrees 에러: ", error);
+    throw error;
+  }
+};
+
 // id로 게시글 상세 조회
 export const getBoardFreeDetail = async (id) => {
   try {
