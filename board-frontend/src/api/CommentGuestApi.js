@@ -34,3 +34,16 @@ export const deleteCommentGuest = async (postId, commentId, password) => {
     throw error;
   }
 };
+
+// 댓글 비밀번호 체크
+export const checkCommentPassword = async (postId, commentId, password) => {
+  try {
+    const response = await axios.delete(`/posts/${postId}/commentGuests/${commentId}`, {
+      data: { password }
+    });
+    return response.data;
+  } catch (error) {
+    console.error("checkCommentPassword 에러: ", error);
+    throw error;
+  }
+};

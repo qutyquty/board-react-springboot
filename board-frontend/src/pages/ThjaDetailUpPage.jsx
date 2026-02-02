@@ -22,16 +22,17 @@ const ThjaDetailUpPage = () => {
     setComments([...comments, saved]);
   };
 
-  const handleDeleteComment = async (commentId, password, confirmed = false) => {
-    if (!confirmed) {
-      // 비밀번호 검증 API 호출
-      const valid = await checkCommentPassword(id, password);
-      return valid;
-    } else {
-      // 최종 삭제 API 호출
-      await deleteCommentGuest(id, commentId, password);
+  const handleDeleteComment = async (commentId, password) => {
+    try {
+      // 비밀번호 체크 후 삭제
+      const response = await deleteCommentGuest(id, commentId, password);
       setComments(comments.filter((c) => c.id !== commentId));    
-      return true;
+    } catch (error) {
+      if (error.response) {
+        alert(error.response.data);
+      } else {
+        alert("삭제 중 오류가 발생했습니다.");
+      }
     }
   };
 

@@ -60,14 +60,18 @@ const FormCU = ({ mode = "create", initialData = {}, onSubmit, showFile = true }
       {/* 내용 */}
       <Form.Group className='mb-3'>
         <Form.Label>내용</Form.Label>
-        <Form.Control as="textarea" rows={10} value={content} placeholder='내용 입력'
-          onChange={handleChange} 
-        />
-        {!showFile && 
-        <div style={{ textAlign: "right", marginTop: "5px" }}>
-          {content.length} / 200
+        <div className='border rounded p-2'>
+          <Form.Control as="textarea" rows={10} value={content} 
+            placeholder='내용 입력'
+            onChange={handleChange} 
+            style={{ border: "none", boxShadow: "none" }}
+          />
+          {!showFile && 
+          <div className='d-flex justify-content-end mt-1'>
+            <small className='text-muted'>{content.length} / 200</small>
+          </div>
+          }
         </div>
-        }
       </Form.Group>
 
       {showFile && (

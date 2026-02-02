@@ -6,6 +6,15 @@ const CommentInput = ({ onSubmit }) => {
   const [password, setPassword] = useState("")
   const [content, setContent] = useState("");
 
+  const handleChange = (e) => {
+    const value = e.target.value;
+    if (value.length > 200) {
+      alert("200자를 초과했습니다.");
+      return;
+    }
+    setContent(value);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!writerName || !password || !content) return;
@@ -34,11 +43,15 @@ const CommentInput = ({ onSubmit }) => {
         </div>
         {/** 오른쪽: 댓글 입력창 */}
         <div className='flex-grow-1'>
-          <Form.Group>
-            <Form.Control as="textarea" rows={5}
+          <Form.Group className='border p-2 rounded'>
+            <Form.Control as="textarea" rows={4}
               placeholder='댓글 입력' value={content}
-              onChange={(e) => setContent(e.target.value)}
+              onChange={handleChange} 
+              style={{ border: "none", boxShadow: "none" }}
             />
+            <div className="d-flex justify-content-end mt-1">
+              <small className='text-muted'>{content.length} / 200</small>
+            </div>
           </Form.Group>
         </div>
       </div>

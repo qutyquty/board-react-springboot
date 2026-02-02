@@ -5,10 +5,9 @@ import java.util.List;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.example.board.dto.CommentDto;
 import com.example.board.dto.CommentGuestDto;
+import com.example.board.dto.PasswordDto;
 import com.example.board.entity.BoardThja;
-import com.example.board.entity.Comment;
 import com.example.board.entity.CommentGuest;
 import com.example.board.mapper.CommentGuestMapper;
 import com.example.board.repository.BoardThjaRepository;
@@ -50,6 +49,19 @@ public class CommentGuestService {
     // 댓글 삭제
     public void deleteComment(Long commentId) {
         commentGuestRepository.deleteById(commentId);
+    }
+    
+    // 댓글 비밀번호 검증
+    public Boolean checkPassword(Long commentId, PasswordDto dto) {
+    	CommentGuest comment = commentGuestRepository.findById(commentId)
+    			.orElseThrow(() -> new RuntimeException("댓글 없음"));
+    	
+    	// DB에 저장된 비밀번호와 비교
+    	if (!passwordEncoder.matches(dto.getPassword(), comment.getPassword())) {
+    		return false;
+    	}
+    	
+    	return true;
     }
 
 }
