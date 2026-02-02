@@ -7,7 +7,7 @@ import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import ThjaListPage from './pages/ThjaListPage';
 import ThjaFormPage from './pages/ThjaFormPage';
-import ThjaDetailPage from './pages/ThjaDetailPage';
+import ThjaDetailUpPage from './pages/ThjaDetailUpPage';
 import ThjaEditPage from './pages/ThjaEditPage';
 import FreeListPage from './pages/FreeListPage';
 import FreeFormPage from './pages/FreeFormPage';
@@ -29,7 +29,7 @@ function App() {
               <Route path='/' element={<HomePage />} />
               <Route path='/thjas' element={<ThjaListPage />} />
               <Route path='/thjas/new' element={<ThjaFormPage />} />
-              <Route path='/thjas/:id' element={<ThjaDetailPage />} />
+              <Route path='/thjas/:id' element={<ThjaDetailUpPage />} />
               <Route path='/thjas/:id/edit' element={<ThjaEditPage />} />
               <Route path='/frees' element={<FreeListPage />} />
               <Route path='/frees/new' element={<FreeFormPage />} />

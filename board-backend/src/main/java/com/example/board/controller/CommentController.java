@@ -26,7 +26,6 @@ public class CommentController {
 	// 댓글 등록
 	@PostMapping
 	public CommentDto addComment(@PathVariable("boardId") Long boardId, @RequestBody CommentDto dto) {
-		System.out.println("boardId: " + boardId);
 		return commentService.addComment(boardId, dto);
 	}
 	
